@@ -19,10 +19,14 @@ python3 .claude/skills/puruto-generator/scripts/generate.py [opciones]
 |---|---|---|---|
 | `--name` | string | *(requerido)* | Nombre del repo (sin espacios) |
 | `--description` | string | `""` | Descripción de una línea |
-| `--db` | bool | `false` | Incluir base de datos SQLite local |
+| `--db` | bool (string `true/false`) | `true` | Incluir base de datos SQLite local |
 | `--skills` | string | `""` | Skills adicionales separadas por comas |
 | `--ipc` | bool | `false` | Incluir runtime IPC (`/call`, `ipc.py`, `invoker.py`) |
 | `--agent-tests` | bool | `false` | Incluir scaffold de Agent-CI (`tests/agent/`) |
+
+:::note
+`generate.py` parsea estos flags booleanos como strings (`\"true\"` / `\"false\"`) y compara en minúsculas.
+:::
 
 ### Repos especiales
 
@@ -88,6 +92,29 @@ python3 .claude/skills/validate/scripts/validate.py [ruta] [opciones]
 | `ruta` | Ruta al repo a validar (por defecto: CWD) |
 | `--json` | Salida en formato JSON (para scripting) |
 
+### Salida JSON (ejemplo real)
+
+Ejemplo de `validate.py --json` sobre un Puruto recién generado:
+
+```json
+{
+  "kind": "standard",
+  "ok": true,
+  "errors": 0,
+  "warnings": 0,
+  "findings": []
+}
+```
+
+Campos devueltos:
+
+- `path`
+- `kind`
+- `ok`
+- `errors`
+- `warnings`
+- `findings[]`
+
 ### Ejemplos
 
 ```bash
@@ -112,10 +139,17 @@ done
 - Presencia de `CLAUDE.md` o `agent.md`
 - Presencia de `README.md`
 - Presencia de `.env.example`
-- Presencia de `.gitignore`
-- Presencia de `.puruto-standard-version`
 - Directorio `.claude/skills/` con las 4 skills base
+- `.puruto-standard-version` (warning si falta o está desalineado)
+- `.gitignore` (warning si existe `.env` y falta `.gitignore`)
 - Validaciones específicas por tipo (`puruto-data`, `puruto-telegram`, etc.)
+- Consistencia IPC (`.puruto-ipc.json`, `/call`, `ipc.py`, `invoker.py`) cuando aplica
+
+### Códigos y findings
+
+Consulta la referencia completa:
+
+- → [Errores y códigos de validación](/referencia/errores-y-codigos/)
 
 ---
 
@@ -132,7 +166,10 @@ python3 .claude/skills/upgrade/scripts/upgrade.py [ruta] [opciones]
 | Flag | Descripción |
 |---|---|
 | `ruta` | Ruta al repo a migrar (por defecto: CWD) |
+| `--target-version` | Versión objetivo (por defecto: última soportada) |
 | `--plan` | Solo muestra qué migraciones aplicarían (sin ejecutar) |
+| `--dry-run` | Simula la migración sin escribir ficheros |
+| `--json` | Salida JSON estructurada |
 
 ### Ejemplos
 
@@ -146,6 +183,50 @@ python3 .claude/skills/upgrade/scripts/upgrade.py ~/purutos/puruto-finanzas
 # Migrar el CWD
 python3 .claude/skills/upgrade/scripts/upgrade.py
 ```
+
+### Salida JSON (ejemplo real: `--plan`)
+
+```json
+{
+  "current_version": "0.0.0",
+  "target_version": "0.2.0",
+  "dry_run": true,
+  "plan": [
+    { "from": "0.0.0", "to": "0.1.0" },
+    { "from": "0.1.0", "to": "0.2.0" }
+  ],
+  "final_version": "0.0.0"
+}
+```
+
+### Salida JSON (ejemplo real: aplicación)
+
+```json
+{
+  "dry_run": false,
+  "applied": [
+    {
+      "from": "0.0.0",
+      "to": "0.1.0",
+      "actions": ["Escribir `.puruto-standard-version` = 0.1.0"]
+    },
+    {
+      "from": "0.1.0",
+      "to": "0.2.0",
+      "actions": ["Escribir `.puruto-standard-version` = 0.2.0"]
+    }
+  ],
+  "final_version": "0.2.0"
+}
+```
+
+### Recomendación de uso
+
+Para repos antiguos o dudosos:
+
+1. `upgrade.py --plan --json`
+2. `upgrade.py --json`
+3. `validate.py --json`
 
 ### Migraciones disponibles
 
