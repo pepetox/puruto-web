@@ -61,7 +61,7 @@ pip install jinja2
 python3 .claude/skills/validate/scripts/validate.py ~/purutos/puruto-data
 ```
 
-すべてが正常に動作していれば`✓ 有効なプルト`と表示されます。
+正常なら、タイプ検出とOK要約（エラー/警告数を含む）が表示されます。
 
 ## 環境変数
 

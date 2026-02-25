@@ -30,7 +30,7 @@ The core idea: **the repository is the application**. The agent reads the repo, 
     Built on the **SKILL.md** format, adopted by Claude Code, Gemini CLI, Codex and Windsurf since December 2025. Write once, run on any agent.
   </Card>
   <Card title="Local ecosystem" icon="laptop">
-    Everything lives in `~/purutos/`. No cloud, no subscriptions. Your data, your machine, your rules.
+    Everything lives in `~/purutos/`. Puruto itself does not depend on the cloud (but the agent/runner you use may require network access or a paid plan). Your data, your machine, your rules.
   </Card>
   <Card title="Generator included" icon="rocket">
     One command creates a complete, functional Puruto repo: `CLAUDE.md`, `agent.md`, 4 base skills, `.env.example` and README — all working from day one.
@@ -41,6 +41,10 @@ The core idea: **the repository is the application**. The agent reads the repo, 
 </CardGrid>
 
 ## Quick start
+
+:::note[Key requirement]
+Puruto does **not** include an agent or LLM model. To use commands like `/init` and `/puruto-generator` you need a `SKILL.md`-compatible agent (for example Claude Code, Codex, Gemini CLI or Windsurf). Otherwise, you can use the framework via CLI with Python scripts.
+:::
 
 ```bash
 # 1. Clone the framework
@@ -54,6 +58,14 @@ pip install jinja2
 
 # 4. Create your first app
 /puruto-generator
+```
+
+If you are not using a compatible agent yet, you can start with CLI:
+
+```bash
+python3 .claude/skills/puruto-generator/scripts/generate.py \
+  --name puruto-demo \
+  --description "Example Puruto"
 ```
 
 ## Ecosystem Purutos

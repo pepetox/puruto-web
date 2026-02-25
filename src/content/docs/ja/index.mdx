@@ -30,7 +30,7 @@ import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
     2025年12月からClaude Code、Gemini CLI、Codex、Windsurfが採用した**SKILL.md**フォーマットに基づいています。一度書けば、どのエージェントでも動きます。
   </Card>
   <Card title="ローカルエコシステム" icon="laptop">
-    すべては`~/purutos/`に存在します。クラウド不要、サブスクリプション不要。あなたのデータ、あなたのマシン、あなたのルール。
+    すべては`~/purutos/`に存在します。プルト自体はクラウド依存ではありません（ただし利用するエージェント/ランナーによってはネットワークや契約が必要な場合があります）。あなたのデータ、あなたのマシン、あなたのルール。
   </Card>
   <Card title="ジェネレーター内蔵" icon="rocket">
     コマンド一つで完全なプルトリポジトリを作成：`CLAUDE.md`、`agent.md`、4つの基本スキル、`.env.example`、README——すべてが最初から動作します。
@@ -41,6 +41,10 @@ import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 </CardGrid>
 
 ## クイックスタート
+
+:::note
+プルトをエージェント経由で使うには、SKILL.md互換エージェント（Claude Code、Gemini CLI、Codex、Windsurf など）が必要です。CLIだけでジェネレーター/バリデーターを使うフローも可能です。
+:::
 
 ```bash
 # 1. フレームワークをクローン
