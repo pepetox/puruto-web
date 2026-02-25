@@ -149,6 +149,7 @@ Revisa:
 ## Siguientes pasos
 
 - → [Integrar Telegram](/recetas/integrar-telegram/)
+- → [`.jobs.json` (referencia)](/referencia/config-jobs-json/)
 - → [puruto-cron (ecosistema)](/ecosistema/puruto-cron/)
 - → [Debug y logs](/operacion/debug-y-logs/)
 

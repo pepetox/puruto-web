@@ -150,6 +150,7 @@ Revisa:
 ## Siguientes pasos
 
 - → [Ejecutar con puruto-cron](/recetas/ejecutar-con-cron/)
+- → [`.channels.json` (referencia)](/referencia/config-channels-json/)
 - → [puruto-telegram (ecosistema)](/ecosistema/puruto-telegram/)
 - → [Seguridad y secretos](/operacion/seguridad-y-secretos/)
 

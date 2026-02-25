@@ -7,10 +7,10 @@ sidebar:
 
 ## ¿Qué es puruto-gateway?
 
-`puruto-gateway` es una **API REST local** que expone los comandos base (`init`, `help`, `list`, `status`) de todos los Purutos activos del ecosistema. Permite integrar Purutos con scripts, dashboards o herramientas externas sin pasar por el agente.
+`puruto-gateway` es una **API REST local** (FastAPI scaffold) para descubrir Purutos del ecosistema y exponer comandos base por HTTP. Permite integrar Purutos con scripts, dashboards o herramientas externas sin pasar por el agente.
 
 :::caution[MVP]
-`puruto-gateway` es un **MVP scaffold**. La API básica generada está disponible. Auth endurecida, contratos estables e invoker real están pendientes.
+`puruto-gateway` es un **MVP scaffold**. Discovery y endpoints básicos existen, pero auth endurecida, contratos estables e invoker real siguen pendientes.
 :::
 
 ## Cuándo usarlo
@@ -28,38 +28,59 @@ python3 .claude/skills/puruto-generator/scripts/generate.py --name puruto-gatewa
 
 ## Endpoints (MVP)
 
-```
-GET  /purutos                          → lista todos los Purutos disponibles
-GET  /purutos/{nombre}/status          → status de un Puruto
-POST /purutos/{nombre}/init            → ejecuta /init en un Puruto
-GET  /purutos/{nombre}/list            → ejecuta /list en un Puruto
-GET  /purutos/{nombre}/help            → ejecuta /help en un Puruto
+```text
+GET  /health
+GET  /purutos
+GET  /purutos/{name}
+POST /purutos/{name}/{command}   # command ∈ {init, help, list, status}
 ```
 
-Respuesta estándar:
+Respuesta típica de discovery:
 
 ```json
 {
-  "puruto": "puruto-finanzas",
-  "action": "status",
   "status": "ok",
-  "result": "..."
+  "count": 1,
+  "items": [
+    {
+      "name": "puruto-data",
+      "path": "/ruta/puruto-data",
+      "kind": "puruto-data",
+      "commands": ["init", "help", "list", "status"]
+    }
+  ]
 }
 ```
 
+:::caution[Limitación conocida del template MVP]
+En el template actual de `routes.py`, el endpoint `POST /purutos/{name}/{command}` tiene una colisión de nombre con el helper importado `invoke_base_command`, por lo que debe considerarse **experimental** hasta corregir el scaffold.
+:::
+
 ## Arquitectura
 
-`puruto-gateway` usa `invoker.py` (scaffold compartido del ecosistema) para invocar los comandos de cada Puruto. El gateway actúa como proxy HTTP → IPC agéntico.
+`puruto-gateway` usa `invoker.py` (scaffold compartido del ecosistema) para construir invocaciones. El gateway actúa como proxy HTTP → invoker local (stub en el MVP).
 
 ```
 Cliente HTTP
     ↓
-puruto-gateway (FastAPI/Flask)
+puruto-gateway (FastAPI)
     ↓
 invoker.py
     ↓
 puruto-finanzas / puruto-data / ...
 ```
+
+## Auth (MVP)
+
+Los endpoints `/purutos*` requieren:
+
+- header `X-API-Key`
+- variable `PURUTO_GATEWAY_API_KEY` configurada
+
+## Ver también
+
+- → [Gateway API (MVP)](/referencia/gateway-api-mvp/)
+- → [Seguridad y secretos](/operacion/seguridad-y-secretos/)
 
 ## Skills incluidas
 
