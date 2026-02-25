@@ -7,10 +7,10 @@ sidebar:
 
 ## What is puruto-telegram?
 
-`puruto-telegram` is the **mobile connector** of the ecosystem. It's a Telegram bot that acts as a router to all your active Purutos, letting you interact with any Puruto from your phone.
+`puruto-telegram` is the **mobile connector** of the ecosystem. It is a Telegram bot with deterministic routing by active channel and a local inbox for ecosystem events (MVP scaffold).
 
 :::caution[MVP]
-`puruto-telegram` is currently an **MVP scaffold**. The deterministic router and local inbox are implemented. Real Telegram chat delivery is in active development.
+`puruto-telegram` is currently an **MVP scaffold**. The bot, channel selection, local status, and inbox draining are implemented. Real routing into Puruto runtimes is still a placeholder in `router.py`.
 :::
 
 ## Routing mechanism
@@ -33,20 +33,18 @@ Routing is **deterministic based on active channel** — it doesn't use AI to in
 user_id  |  active_puruto  |  timestamp
 ```
 
-## Telegram UX
+## Telegram UX (scaffold)
 
-Leverages Telegram's native mechanisms:
+The scaffold implements:
 
-- **Command menu** (`/`): lists all available channels with description. Automatically registered with `setMyCommands`.
-- **Persistent Reply Keyboard**: always-visible keyboard with the active channel and quick-switch buttons.
+- base commands (`/start`, `/list`, `/status`)
+- dynamic per-channel commands (registered at startup from `.channels.json`)
+- reply keyboard for quick channel switching
 
-```
-┌─────────────────────────────────┐
-│  Active channel: 💰 Finance      │
-├──────────────┬──────────────────┤
-│  🏥 Health   │  📅 Reservations │
-└──────────────┴──────────────────┘
-```
+The exact UI depends on the Telegram client. The bot builds a `ReplyKeyboardMarkup` with:
+
+- first row: active channel
+- second row: other channels (up to 3 buttons)
 
 ## Local inbox from puruto-cron
 
@@ -58,7 +56,7 @@ Leverages Telegram's native mechanisms:
     └── cron-events.jsonl   ← scheduler events
 ```
 
-The `inbox.py --deliver` script (MVP scaffold) processes pending events and delivers them to the configured chat.
+The `inbox.py --deliver` script (MVP scaffold) processes pending events and can send them to the configured chat (`PURUTO_TELEGRAM_DEFAULT_CHAT_ID`).
 
 ## Generate and configure
 
@@ -70,11 +68,21 @@ Configuration in `.env`:
 
 ```bash
 PURUTO_TELEGRAM_BOT_TOKEN=your_token_here
-PURUTO_TELEGRAM_CHAT_ID=your_chat_id  # ID of your personal chat
+PURUTO_TELEGRAM_DEFAULT_CHAT_ID=your_chat_id  # optional, used by inbox.py --deliver
 ```
 
 To get the token: talk to [@BotFather](https://t.me/BotFather) on Telegram.
 
+## Current router limitation (MVP)
+
+`router.py` locates the active channel's repo, but currently returns a placeholder response instead of invoking a real Puruto runtime.
+
 ## Extensibility
 
-Each new Puruto you add to the ecosystem can be registered in `puruto-telegram`. The corresponding command appears automatically in the menu — no code changes, just configuration.
+Each new Puruto can be registered via `.channels.json` / `/add-channel`. After restarting `bot.py`, the channel command becomes available.
+
+## See also
+
+- [`.channels.json` reference](/referencia/config-channels-json/)
+- [Local runtime artifacts (MVP)](/referencia/artefactos-runtime-locales/)
+- [Diagnosing puruto-telegram](/operacion/diagnostico-puruto-telegram/)

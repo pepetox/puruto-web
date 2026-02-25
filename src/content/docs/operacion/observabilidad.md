@@ -122,6 +122,21 @@ ls -la db inbox
 python3 inbox.py --limit 20
 ```
 
+### `puruto-gateway`
+
+Señales útiles (MVP scaffold):
+
+- `GET /health`
+- discovery de Purutos (`/purutos`)
+- estado de `PURUTO_GATEWAY_API_KEY`
+
+Comandos útiles:
+
+```bash
+python3 -c "import os; print('OK' if os.getenv('PURUTO_GATEWAY_API_KEY') else 'FALTA')"
+python3 -c "from registry import list_purutos; print([i['name'] for i in list_purutos()])"
+```
+
 ## Señales de observabilidad para IPC
 
 En repos con `--ipc true`:
@@ -159,6 +174,8 @@ Puedes añadirlo después, pero este baseline ya permite depurar bastante.
 
 - → [Debug y logs](/operacion/debug-y-logs/)
 - → [Diagnóstico de puruto-data](/operacion/diagnostico-puruto-data/)
+- → [Diagnóstico de puruto-cron](/operacion/diagnostico-puruto-cron/)
+- → [Diagnóstico de puruto-telegram](/operacion/diagnostico-puruto-telegram/)
 - → [Artefactos runtime locales (MVP)](/referencia/artefactos-runtime-locales/)
 - → [CI/CD](/operacion/ci-cd/)
 - → [Ejecutar con puruto-cron](/recetas/ejecutar-con-cron/)

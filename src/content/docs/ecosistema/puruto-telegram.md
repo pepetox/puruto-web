@@ -7,15 +7,15 @@ sidebar:
 
 ## ¿Qué es puruto-telegram?
 
-`puruto-telegram` es el **conector móvil del ecosistema**. Es un bot de Telegram que actúa como router hacia todos tus Purutos activos, permitiéndote interactuar con cualquier Puruto desde tu móvil.
+`puruto-telegram` es el **conector móvil del ecosistema**. Es un bot de Telegram con routing determinista por canal activo y un inbox local para eventos del ecosistema (MVP scaffold).
 
 :::caution[MVP]
-`puruto-telegram` es actualmente un **MVP scaffold**. El router determinista y el inbox local están implementados. La entrega real de mensajes al chat de Telegram está en desarrollo activo.
+`puruto-telegram` es actualmente un **MVP scaffold**. El bot, la selección de canal, el estado local y el drenado de inbox están implementados. El enrutamiento real hacia runtimes de Puruto sigue en placeholder en `router.py`.
 :::
 
 ## Mecanismo de enrutamiento
 
-El enrutamiento es **determinista basado en canal activo** — no usa IA para interpretar intención. El usuario selecciona explícitamente a qué Puruto hablar:
+El enrutamiento es determinista por canal activo. El usuario selecciona explícitamente a qué Puruto hablar:
 
 ```
 /finanzas    → activa puruto-finanzas como canal activo
@@ -33,20 +33,18 @@ El enrutamiento es **determinista basado en canal activo** — no usa IA para in
 user_id  |  puruto_activo  |  timestamp
 ```
 
-## UX de Telegram
+## UX de Telegram (scaffold)
 
-Aprovecha los mecanismos nativos de Telegram:
+El scaffold implementa:
 
-- **Menú de comandos** (`/`): lista todos los canales disponibles con descripción. Se registra automáticamente con `setMyCommands`.
-- **Reply Keyboard persistente**: teclado siempre visible con el canal activo y botones de cambio rápido.
+- comandos base (`/start`, `/list`, `/status`)
+- comandos dinámicos por canal (registrados al arrancar, según `.channels.json`)
+- reply keyboard para cambio de canal rápido
 
-```
-┌─────────────────────────────────┐
-│  Canal activo: 💰 Finanzas       │
-├──────────────┬──────────────────┤
-│  🏥 Salud    │  📅 Reservas     │
-└──────────────┴──────────────────┘
-```
+La forma visual concreta depende del cliente de Telegram; el bot construye un `ReplyKeyboardMarkup` con:
+
+- primera fila: canal activo
+- segunda fila: otros canales (hasta 3 botones)
 
 ## Inbox local de puruto-cron
 
@@ -58,7 +56,7 @@ Aprovecha los mecanismos nativos de Telegram:
     └── cron-events.jsonl   ← eventos del scheduler
 ```
 
-El script `inbox.py --deliver` (scaffold MVP) procesa los eventos pendientes y los entrega al chat configurado.
+El script `inbox.py --deliver` (scaffold MVP) procesa los eventos pendientes y puede enviarlos al chat configurado (`PURUTO_TELEGRAM_DEFAULT_CHAT_ID`).
 
 ## Generarlo y configurarlo
 
@@ -70,11 +68,21 @@ Configuración en `.env`:
 
 ```bash
 PURUTO_TELEGRAM_BOT_TOKEN=tu_token_aqui
-PURUTO_TELEGRAM_CHAT_ID=tu_chat_id  # ID de tu chat personal
+PURUTO_TELEGRAM_DEFAULT_CHAT_ID=tu_chat_id  # para inbox.py --deliver (opcional)
 ```
 
 Para obtener el token: habla con [@BotFather](https://t.me/BotFather) en Telegram.
 
+## Limitación actual del router (MVP)
+
+`router.py` localiza el repo del canal activo, pero hoy devuelve una respuesta placeholder (enrutamiento real pendiente) en lugar de invocar un runtime real del Puruto.
+
 ## Extensibilidad
 
-Cada nuevo Puruto que añades al ecosistema se puede registrar en `puruto-telegram`. El comando correspondiente aparece automáticamente en el menú — sin cambios de código, solo configuración.
+Cada nuevo Puruto que añades al ecosistema se puede registrar en `puruto-telegram` vía `.channels.json` / skill `/add-channel`. Tras reiniciar `bot.py`, el comando del canal queda disponible.
+
+## Ver también
+
+- → [`.channels.json` (referencia)](/referencia/config-channels-json/)
+- → [Artefactos runtime locales (MVP)](/referencia/artefactos-runtime-locales/)
+- → [Diagnóstico de puruto-telegram](/operacion/diagnostico-puruto-telegram/)

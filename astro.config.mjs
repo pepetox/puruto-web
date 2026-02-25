@@ -64,6 +64,8 @@ export default defineConfig({
             { slug: 'operacion/deploy-de-la-web' },
             { slug: 'operacion/diagnostico-puruto-gateway' },
             { slug: 'operacion/diagnostico-puruto-data' },
+            { slug: 'operacion/diagnostico-puruto-cron' },
+            { slug: 'operacion/diagnostico-puruto-telegram' },
           ],
         },
         {
