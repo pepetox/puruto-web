@@ -49,6 +49,15 @@ Campos especialmente útiles:
 - `warnings`
 - `findings[]`
 
+Importante:
+
+- usa también el `exit code` como gate principal
+- `argparse` (errores de flags) no devuelve JSON estructurado
+
+Referencia:
+
+- → [Salidas JSON de CLI](/referencia/salidas-json-cli/)
+
 ## ¿Qué pasa si tengo `.puruto-ipc.json` pero no quiero usar IPC todavía?
 
 Si dejas `.puruto-ipc.json` en el repo, mantén también:
@@ -119,11 +128,45 @@ El sitio usa i18n con fallback (Starlight). Si falta traducción específica, la
 
 Esto es útil para cobertura rápida, pero conviene traducir primero páginas fundacionales.
 
+## ¿Por qué `npm run build` de la docs avisa `Duplicate id` pero termina bien?
+
+En este sitio (Starlight + i18n con fallback), ese warning puede aparecer cuando una página raíz también se resuelve para `en/` o `ja/`.
+
+En la práctica:
+
+- el build puede completar correctamente
+- pero conviene vigilar IDs/slug para evitar colisiones reales
+
+Si el warning aparece en una página recién creada, revisa:
+
+1. ruta/slug
+2. duplicados accidentales de archivo/contenido
+3. comportamiento de fallback i18n
+
+## ¿Por qué un deploy puede salir verde y seguir viéndose contenido antiguo?
+
+Causas más comunes:
+
+1. se desplegó un commit anterior (cambios locales sin push)
+2. caché del navegador/CDN
+
+Checklist rápido:
+
+1. compara el commit del último run de Actions con `git rev-parse HEAD`
+2. hard refresh (`Cmd+Shift+R`)
+3. prueba en incógnito
+
+Runbook relacionado:
+
+- → [Deploy de la web](/operacion/deploy-de-la-web/)
+
 ## Siguientes pasos
 
 - → [FAQ](/faq/)
 - → [CI/CD](/operacion/ci-cd/)
 - → [Observabilidad](/operacion/observabilidad/)
+- → [Salidas JSON de CLI](/referencia/salidas-json-cli/)
+- → [Deploy de la web](/operacion/deploy-de-la-web/)
 - → [Glosario](/referencia/glosario/)
 
 ## Última verificación

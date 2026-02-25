@@ -135,6 +135,8 @@ Causa:
 ## Siguientes pasos
 
 - → [IPC agéntico](/referencia/ipc/)
+- → [Contratos runtime (MVP)](/referencia/contratos-runtime/)
+- → [Artefactos runtime locales (MVP)](/referencia/artefactos-runtime-locales/)
 - → [Seguridad y secretos](/operacion/seguridad-y-secretos/)
 - → [Errores y códigos de validación](/referencia/errores-y-codigos/)
 

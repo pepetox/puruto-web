@@ -143,6 +143,7 @@ Puedes añadirlo después, pero este baseline ya permite depurar bastante.
 ## Siguientes pasos
 
 - → [Debug y logs](/operacion/debug-y-logs/)
+- → [Artefactos runtime locales (MVP)](/referencia/artefactos-runtime-locales/)
 - → [CI/CD](/operacion/ci-cd/)
 - → [Ejecutar con puruto-cron](/recetas/ejecutar-con-cron/)
 

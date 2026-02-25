@@ -161,6 +161,7 @@ Antes de abrir PR en `puruto`:
 Si automatizas gates o reportes con JSON:
 
 - → [Salidas JSON de CLI](/referencia/salidas-json-cli/)
+- → [Gate de CI con validate.py --json](/recetas/gate-ci-con-validate-json/)
 
 ## CI de la web (`puruto-web`) vs CI del framework
 

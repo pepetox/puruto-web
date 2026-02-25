@@ -73,6 +73,7 @@ export default defineConfig({
             { slug: 'recetas/ipc-entre-purutos' },
             { slug: 'recetas/ejecutar-con-cron' },
             { slug: 'recetas/integrar-telegram' },
+            { slug: 'recetas/gate-ci-con-validate-json' },
           ],
         },
         {
@@ -93,6 +94,7 @@ export default defineConfig({
             { slug: 'referencia/formato-skill' },
             { slug: 'referencia/ipc' },
             { slug: 'referencia/contratos-runtime' },
+            { slug: 'referencia/artefactos-runtime-locales' },
             { slug: 'referencia/config-completa' },
             { slug: 'referencia/variables-de-entorno' },
             { slug: 'referencia/errores-y-codigos' },
