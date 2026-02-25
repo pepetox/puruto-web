@@ -31,9 +31,9 @@ The `~/purutos/` folder is **not a git repo** — it's just a working directory.
 ```
 ~/purutos/puruto-data/
 ├── CLAUDE.md              ← access rules and data management
-├── finance/               ← data owned by puruto-finance
-├── health/                ← data owned by puruto-health
-├── notes/                 ← data owned by puruto-notes
+├── puruto-finance/        ← data owned by puruto-finance
+├── puruto-health/         ← data owned by puruto-health
+├── puruto-notes/          ← data owned by puruto-notes
 └── shared/                ← cross-domain data (controlled access)
 ```
 
@@ -58,7 +58,7 @@ Each Puruto finds it at `../puruto-data/` by default, or via `PURUTO_DATA_PATH` 
 The persistent Telegram keyboard always shows the active channel and allows quick switching.
 
 :::caution
-`puruto-telegram` is currently an **MVP scaffold**. The deterministic router and local inbox are implemented; real Telegram chat delivery is in development.
+`puruto-telegram` is currently an **MVP scaffold**. The bot, local inbox, and channel selection are implemented; real routing into Puruto runtimes is still a placeholder.
 :::
 
 ## puruto-cron — the local scheduler
@@ -68,7 +68,7 @@ The persistent Telegram keyboard always shows the active channel and allows quic
 - Job scheduling with cron expressions
 - Lease/lock to avoid duplicate executions
 - Per-job retries with backoff
-- Optional JSONL outbox to notify `puruto-telegram`
+- Local notification JSONL + optional replication to `puruto-telegram` inbox
 
 :::caution
 `puruto-cron` is an **MVP scaffold**. The basic SQLite scheduler is operational; the real Puruto invoker and advanced retry policy are in R&D.

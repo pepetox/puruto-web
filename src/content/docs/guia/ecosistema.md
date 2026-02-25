@@ -31,9 +31,9 @@ La carpeta `~/purutos/` **no es un repo git** — es solo un directorio de traba
 ```
 ~/purutos/puruto-data/
 ├── CLAUDE.md              ← reglas de acceso y gestión
-├── finanzas/              ← datos propiedad de puruto-finanzas
-├── salud/                 ← datos propiedad de puruto-salud
-├── notas/                 ← datos propiedad de puruto-notas
+├── puruto-finanzas/       ← datos propiedad de puruto-finanzas
+├── puruto-salud/          ← datos propiedad de puruto-salud
+├── puruto-notas/          ← datos propiedad de puruto-notas
 └── shared/                ← datos cross-dominio (acceso controlado)
 ```
 
@@ -58,7 +58,7 @@ Cada Puruto lo encuentra en `../puruto-data/` por defecto, o mediante `PURUTO_DA
 El teclado persistente de Telegram muestra siempre el canal activo y permite cambiar rápido.
 
 :::caution
-`puruto-telegram` es actualmente un **MVP scaffold**. El router determinista y el inbox local están implementados; la entrega real al chat de Telegram está en desarrollo.
+`puruto-telegram` es actualmente un **MVP scaffold**. El bot, el inbox local y la selección de canal están implementados; el enrutamiento real hacia runtimes de Puruto sigue en placeholder.
 :::
 
 ## puruto-cron — el scheduler local
@@ -68,7 +68,7 @@ El teclado persistente de Telegram muestra siempre el canal activo y permite cam
 - Programación de jobs con cron expressions
 - Lease/lock para evitar ejecuciones duplicadas
 - Retries por job con backoff
-- Outbox JSONL opcional para notificar a `puruto-telegram`
+- Notificaciones JSONL locales + replicación opcional al inbox de `puruto-telegram`
 
 :::caution
 `puruto-cron` es un **MVP scaffold**. El scheduler básico con SQLite está operativo; el invoker real y la política de retries avanzada están en I+D.

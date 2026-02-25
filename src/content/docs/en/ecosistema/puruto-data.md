@@ -37,26 +37,28 @@ python3 .claude/skills/puruto-generator/scripts/generate.py --name puruto-data
 ├── agent.md
 ├── README.md
 ├── .env.example
-├── .env
+├── registry.json          ← registered Purutos index
+├── shared/                ← shared data (controlled access)
+├── <puruto-name>/         ← data for each registered Puruto
+├── .env                   ← optional (local environment)
 ├── .puruto-standard-version
-├── db/                    ← internal vault management
 └── .claude/skills/
     ├── init/SKILL.md
     ├── help/SKILL.md
     ├── list/SKILL.md
     ├── status/SKILL.md
-    ├── read/SKILL.md      ← read data from a Puruto
-    ├── write/SKILL.md     ← write/update data
-    └── list-data/SKILL.md ← list available data
+    ├── register/SKILL.md  ← register Purutos in the vault
+    ├── read/SKILL.md      ← read data (if included in your scaffold)
+    └── write/SKILL.md     ← write data (if included in your scaffold)
 ```
 
 Each Puruto's data is stored in its own subfolder:
 
 ```
 ~/purutos/puruto-data/
-├── finance/               ← data owned by puruto-finance
-├── health/                ← data owned by puruto-health
-├── notes/                 ← data owned by puruto-notes
+├── puruto-finance/        ← data owned by puruto-finance
+├── puruto-health/         ← data owned by puruto-health
+├── puruto-notes/          ← data owned by puruto-notes
 └── shared/                ← cross-domain data (controlled access)
 ```
 
@@ -76,10 +78,15 @@ PURUTO_DATA_PATH=/home/user/purutos/puruto-data/
 
 ## Access policy
 
-- Each Puruto only writes to **its own folder** (`data/<puruto-name>/`)
+- Each Puruto only writes to **its own folder** (`<puruto-name>/` at the root of `puruto-data`)
 - Access to `shared/` is open to all Purutos in the ecosystem
 - `puruto-data` is never published in the marketplace — it's a **private** repo by design
 
 :::danger
 `puruto-data` contains your personal data. **Never** make it public or upload it to a public GitHub repository.
 :::
+
+## See also
+
+- [`puruto-data registry.json` reference](/referencia/registry-json-puruto-data/)
+- [Diagnosing puruto-data](/operacion/diagnostico-puruto-data/)
