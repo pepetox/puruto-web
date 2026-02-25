@@ -1,0 +1,86 @@
+---
+title: Puruto
+description: Framework for building agentic applications. The repository IS the application.
+template: splash
+hero:
+  tagline: The repository IS the application
+  image:
+    file: ../../../assets/logo.svg
+  actions:
+    - text: Get started in 5 minutes
+      link: /en/guia/instalacion/
+      icon: right-arrow
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/pepetox/puruto
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## What is Puruto?
+
+Puruto is a **development framework for building agentic applications**. It defines a standard for packaging apps so that any code agent can understand and run them — without additional configuration.
+
+The core idea: **the repository is the application**. The agent reads the repo, knows who it is, what it can do, and how to behave.
+
+<CardGrid stagger>
+  <Card title="Open standard" icon="puzzle">
+    Built on the **SKILL.md** format, adopted by Claude Code, Gemini CLI, Codex and Windsurf since December 2025. Write once, run on any agent.
+  </Card>
+  <Card title="Local ecosystem" icon="laptop">
+    Everything lives in `~/purutos/`. No cloud, no subscriptions. Your data, your machine, your rules.
+  </Card>
+  <Card title="Generator included" icon="rocket">
+    One command creates a complete, functional Puruto repo: `CLAUDE.md`, `agent.md`, 4 base skills, `.env.example` and README — all working from day one.
+  </Card>
+  <Card title="Composable" icon="add-document">
+    Connect Purutos to each other with agentic IPC. `puruto-data` as a data vault, `puruto-telegram` as a mobile connector.
+  </Card>
+</CardGrid>
+
+## Quick start
+
+```bash
+# 1. Clone the framework
+git clone https://github.com/pepetox/puruto.git && cd puruto
+
+# 2. Install generator dependency
+pip install jinja2
+
+# 3. Open in your agent and initialize the ecosystem
+/init
+
+# 4. Create your first app
+/puruto-generator
+```
+
+## Ecosystem Purutos
+
+<CardGrid>
+  <LinkCard
+    title="puruto-data"
+    description="Private data vault. All Purutos read and write here."
+    href="/en/ecosistema/puruto-data/"
+  />
+  <LinkCard
+    title="puruto-telegram"
+    description="Mobile connector with deterministic routing by active channel."
+    href="/en/ecosistema/puruto-telegram/"
+  />
+  <LinkCard
+    title="puruto-cron"
+    description="Local async job scheduler with SQLite and notifications."
+    href="/en/ecosistema/puruto-cron/"
+  />
+  <LinkCard
+    title="puruto-gateway"
+    description="Unified REST API to expose Puruto base commands."
+    href="/en/ecosistema/puruto-gateway/"
+  />
+</CardGrid>
+
+---
+
+*プルト (Puruto) — Japanese phonetic adaptation of Pluto. Small, but with its own ecosystem.*

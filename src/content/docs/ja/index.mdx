@@ -1,0 +1,86 @@
+---
+title: プルト
+description: エージェントアプリ開発フレームワーク。リポジトリがそのままアプリケーションです。
+template: splash
+hero:
+  tagline: リポジトリがアプリケーションそのもの
+  image:
+    file: ../../../assets/logo.svg
+  actions:
+    - text: 5分で始める
+      link: /ja/guia/instalacion/
+      icon: right-arrow
+      variant: primary
+    - text: GitHubで見る
+      link: https://github.com/pepetox/puruto
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## プルトとは？
+
+プルトは**エージェントアプリケーションを作るための開発フレームワーク**です。アプリをパッケージ化するための標準を定義し、どのコードエージェント（Claude Code、Gemini CLI、Codex、Windsurf）でも追加設定なしに理解・実行できます。
+
+核心的なアイデア：**リポジトリがアプリケーション**です。エージェントはリポジトリを読むだけで、自分が誰で、何ができて、どう動くべきかを知ります。
+
+<CardGrid stagger>
+  <Card title="オープンスタンダード" icon="puzzle">
+    2025年12月からClaude Code、Gemini CLI、Codex、Windsurfが採用した**SKILL.md**フォーマットに基づいています。一度書けば、どのエージェントでも動きます。
+  </Card>
+  <Card title="ローカルエコシステム" icon="laptop">
+    すべては`~/purutos/`に存在します。クラウド不要、サブスクリプション不要。あなたのデータ、あなたのマシン、あなたのルール。
+  </Card>
+  <Card title="ジェネレーター内蔵" icon="rocket">
+    コマンド一つで完全なプルトリポジトリを作成：`CLAUDE.md`、`agent.md`、4つの基本スキル、`.env.example`、README——すべてが最初から動作します。
+  </Card>
+  <Card title="コンポーザブル" icon="add-document">
+    エージェントIPCでプルト同士を接続。`puruto-data`はデータ保管庫、`puruto-telegram`はモバイルコネクタ。
+  </Card>
+</CardGrid>
+
+## クイックスタート
+
+```bash
+# 1. フレームワークをクローン
+git clone https://github.com/pepetox/puruto.git && cd puruto
+
+# 2. ジェネレーターの依存関係をインストール
+pip install jinja2
+
+# 3. エージェントで開いてエコシステムを初期化
+/init
+
+# 4. 最初のアプリを作成
+/puruto-generator
+```
+
+## エコシステムのプルト
+
+<CardGrid>
+  <LinkCard
+    title="puruto-data"
+    description="プライベートデータ保管庫。すべてのプルトはここで読み書きします。"
+    href="/ja/ecosistema/puruto-data/"
+  />
+  <LinkCard
+    title="puruto-telegram"
+    description="アクティブチャンネルによる確定的ルーティングを持つモバイルコネクタ。"
+    href="/ja/ecosistema/puruto-telegram/"
+  />
+  <LinkCard
+    title="puruto-cron"
+    description="SQLiteと通知を使ったローカル非同期ジョブスケジューラ。"
+    href="/ja/ecosistema/puruto-cron/"
+  />
+  <LinkCard
+    title="puruto-gateway"
+    description="プルトの基本コマンドを公開する統合REST API。"
+    href="/ja/ecosistema/puruto-gateway/"
+  />
+</CardGrid>
+
+---
+
+*プルト — "Pluto"（冥王星）の日本語音写。小さいけれど、独自のエコシステムを持つ。*

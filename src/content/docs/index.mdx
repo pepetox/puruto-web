@@ -1,0 +1,86 @@
+---
+title: Puruto
+description: Framework para crear aplicaciones agénticas. El repositorio ES la aplicación.
+template: splash
+hero:
+  tagline: El repositorio ES la aplicación
+  image:
+    file: ../../assets/logo.svg
+  actions:
+    - text: Empieza en 5 minutos
+      link: /guia/instalacion/
+      icon: right-arrow
+      variant: primary
+    - text: Ver en GitHub
+      link: https://github.com/pepetox/puruto
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## ¿Qué es Puruto?
+
+Puruto es un **framework de desarrollo para crear aplicaciones agénticas**. Define un estándar para empaquetar apps de forma que cualquier agente de código las entienda y ejecute — sin configuración adicional.
+
+La idea central: **el repositorio es la aplicación**. El agente lee el repo, sabe quién es, qué puede hacer y cómo comportarse.
+
+<CardGrid stagger>
+  <Card title="Estándar abierto" icon="puzzle">
+    Basado en el formato **SKILL.md**, adoptado por Claude Code, Gemini CLI, Codex y Windsurf desde diciembre 2025. Escríbelo una vez, ejecútalo en cualquier agente.
+  </Card>
+  <Card title="Ecosistema local" icon="laptop">
+    Todo vive en `~/purutos/`. Sin cloud, sin subscripciones. Tus datos, tu máquina, tus reglas.
+  </Card>
+  <Card title="Generador incluido" icon="rocket">
+    Un comando crea un repo Puruto completo: `CLAUDE.md`, `agent.md`, 4 skills base, `.env.example` y README — todo funcional desde el primer momento.
+  </Card>
+  <Card title="Componible" icon="add-document">
+    Conecta Purutos entre sí con IPC agéntico. `puruto-data` como bóveda de datos, `puruto-telegram` como conector móvil.
+  </Card>
+</CardGrid>
+
+## Empieza rápido
+
+```bash
+# 1. Clona el framework
+git clone https://github.com/pepetox/puruto.git && cd puruto
+
+# 2. Instala la dependencia del generador
+pip install jinja2
+
+# 3. Abre en tu agente e inicializa el ecosistema
+/init
+
+# 4. Crea tu primera app
+/puruto-generator
+```
+
+## Purutos del ecosistema
+
+<CardGrid>
+  <LinkCard
+    title="puruto-data"
+    description="Bóveda de datos privada. Todos los Purutos leen y escriben aquí."
+    href="/ecosistema/puruto-data/"
+  />
+  <LinkCard
+    title="puruto-telegram"
+    description="Conector móvil con enrutamiento determinista por canal activo."
+    href="/ecosistema/puruto-telegram/"
+  />
+  <LinkCard
+    title="puruto-cron"
+    description="Scheduler local de jobs asíncronos con SQLite y notificaciones."
+    href="/ecosistema/puruto-cron/"
+  />
+  <LinkCard
+    title="puruto-gateway"
+    description="API REST unificada para exponer comandos de Purutos activos."
+    href="/ecosistema/puruto-gateway/"
+  />
+</CardGrid>
+
+---
+
+*プルト (Puruto) — adaptación fonética japonesa de Plutón. Pequeño, con ecosistema propio.*

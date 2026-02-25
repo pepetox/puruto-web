@@ -1,0 +1,47 @@
+/* Puruto — Paleta Plutón
+   Violeta profundo inspirado en la atmósfera de Plutón */
+
+:root {
+  --sl-color-accent-low: #2e1065;
+  --sl-color-accent: #7c3aed;
+  --sl-color-accent-high: #c4b5fd;
+  --sl-color-text-accent: #a78bfa;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: #ede9fe;
+  --sl-color-accent: #6d28d9;
+  --sl-color-accent-high: #4c1d95;
+  --sl-color-text-accent: #6d28d9;
+}
+
+/* Logo size en la nav */
+.site-title img {
+  height: 2rem;
+  width: auto;
+}
+
+/* Hero — ajuste de tagline */
+.hero .tagline {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* Code blocks — bordes sutiles */
+.expressive-code .frame {
+  border-radius: 0.5rem;
+}
+
+/* Badges de estado (MVP, estable, etc.) */
+.badge-mvp {
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: #2e1065;
+  color: #c4b5fd;
+  border-radius: 999px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
