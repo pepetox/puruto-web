@@ -96,6 +96,7 @@ export default defineConfig({
             { slug: 'referencia/config-completa' },
             { slug: 'referencia/variables-de-entorno' },
             { slug: 'referencia/errores-y-codigos' },
+            { slug: 'referencia/salidas-json-cli' },
             { slug: 'referencia/glosario' },
             { slug: 'referencia/cli' },
           ],

@@ -158,6 +158,10 @@ Antes de abrir PR en `puruto`:
 3. Ejecuta guardias si tocaste generador/templates/validate/upgrade
 4. Revisa docs del framework (`README.md`, `CLAUDE.md`, `CHANGELOG.md`)
 
+Si automatizas gates o reportes con JSON:
+
+- → [Salidas JSON de CLI](/referencia/salidas-json-cli/)
+
 ## CI de la web (`puruto-web`) vs CI del framework
 
 - `puruto-web`: build y deploy de Astro/Starlight (GitHub Pages)
