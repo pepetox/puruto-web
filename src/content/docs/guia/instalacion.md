@@ -1,22 +1,20 @@
 ---
 title: Instalación
-description: Prepara tu entorno Puruto desde cero en 5 minutos.
+description: Prepara tu entorno Puruto desde cero en modo agente o en modo CLI.
 sidebar:
-  order: 1
+  order: 2
 ---
 
-## Requisitos
+## Antes de empezar
 
-- **Python 3.10+** — el generador y validador usan sintaxis moderna (`|`, tipos genéricos)
-- **Un agente compatible con SKILL.md**: [Claude Code](https://claude.ai/code), Gemini CLI, Codex o Windsurf
-- **Git**
+Lee primero:
 
-Verifica tu Python:
+- → [Requisitos](/guia/requisitos/)
+- → [Agentes y modelos](/conceptos/agentes-y-modelos/)
 
-```bash
-python3 --version
-# Python 3.10.x o superior
-```
+:::note
+Los pasos con `/init` requieren un agente compatible con `SKILL.md`. Si todavía no lo tienes, puedes usar el generador por CLI y volver luego al modo agente.
+:::
 
 ## 1. Clona el framework
 
@@ -62,6 +60,22 @@ python3 .claude/skills/validate/scripts/validate.py ~/purutos/puruto-data
 ```
 
 Deberías ver `✓ Puruto válido` si todo ha ido bien.
+
+### Alternativa: crear un Puruto por CLI (sin agente)
+
+Si aún no tienes agente compatible, puedes validar el framework generando un repo de prueba:
+
+```bash
+python3 .claude/skills/puruto-generator/scripts/generate.py \
+  --name puruto-demo \
+  --description "Puruto de ejemplo"
+```
+
+Después valida el repo generado:
+
+```bash
+python3 .claude/skills/validate/scripts/validate.py ~/purutos/puruto-demo
+```
 
 ## Variables de entorno
 

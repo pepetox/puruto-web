@@ -7,10 +7,14 @@ hero:
   image:
     file: ../../assets/logo.svg
   actions:
+    - text: Requisitos
+      link: /guia/requisitos/
+      icon: right-arrow
+      variant: primary
     - text: Empieza en 5 minutos
       link: /guia/instalacion/
       icon: right-arrow
-      variant: primary
+      variant: secondary
     - text: Ver en GitHub
       link: https://github.com/pepetox/puruto
       icon: external
@@ -24,6 +28,10 @@ import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 Puruto es un **framework de desarrollo para crear aplicaciones agénticas**. Define un estándar para empaquetar apps de forma que cualquier agente de código las entienda y ejecute — sin configuración adicional.
 
 La idea central: **el repositorio es la aplicación**. El agente lee el repo, sabe quién es, qué puede hacer y cómo comportarse.
+
+:::note[Requisito clave]
+Puruto **no incluye** un agente ni un modelo LLM. Para usar comandos como `/init` y `/puruto-generator` necesitas un agente compatible con `SKILL.md` (por ejemplo Claude Code, Codex, Gemini CLI o Windsurf). Si no, puedes usar el framework por CLI con scripts Python.
+:::
 
 <CardGrid stagger>
   <Card title="Estándar abierto" icon="puzzle">
@@ -42,6 +50,11 @@ La idea central: **el repositorio es la aplicación**. El agente lee el repo, sa
 
 ## Empieza rápido
 
+Antes de empezar, revisa:
+
+- [Requisitos](/guia/requisitos/)
+- [Agentes y modelos](/conceptos/agentes-y-modelos/)
+
 ```bash
 # 1. Clona el framework
 git clone https://github.com/pepetox/puruto.git && cd puruto
@@ -49,11 +62,19 @@ git clone https://github.com/pepetox/puruto.git && cd puruto
 # 2. Instala la dependencia del generador
 pip install jinja2
 
-# 3. Abre en tu agente e inicializa el ecosistema
+# 3. Abre el repo en tu agente compatible e inicializa el ecosistema
 /init
 
 # 4. Crea tu primera app
 /puruto-generator
+```
+
+Si aún no usas un agente compatible, puedes empezar por CLI:
+
+```bash
+python3 .claude/skills/puruto-generator/scripts/generate.py \
+  --name puruto-demo \
+  --description "Puruto de ejemplo"
 ```
 
 ## Purutos del ecosistema

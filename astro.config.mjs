@@ -23,17 +23,64 @@ export default defineConfig({
       },
       customCss: ['./src/styles/custom.css'],
       editLink: {
-        baseUrl: 'https://github.com/pepetox/puruto/edit/main/web/',
+        baseUrl: 'https://github.com/pepetox/puruto-web/edit/main/',
       },
       sidebar: [
         {
           label: 'Guías',
           translations: { en: 'Guides', ja: 'ガイド' },
           items: [
+            { slug: 'guia/requisitos' },
             { slug: 'guia/instalacion' },
+            { slug: 'guia/configuracion-minima' },
+            { slug: 'guia/verificar-instalacion' },
+            { slug: 'guia/primer-ejemplo-funcional' },
             { slug: 'guia/primer-puruto' },
             { slug: 'guia/skills' },
             { slug: 'guia/ecosistema' },
+          ],
+        },
+        {
+          label: 'Conceptos',
+          translations: { en: 'Concepts', ja: 'コンセプト' },
+          items: [
+            { slug: 'conceptos/que-es-puruto' },
+            { slug: 'conceptos/agentes-y-modelos' },
+            { slug: 'conceptos/modelo-de-ejecucion' },
+            { slug: 'conceptos/ciclo-de-vida-de-una-tarea' },
+          ],
+        },
+        {
+          label: 'Operación',
+          translations: { en: 'Operations', ja: '運用' },
+          collapsed: true,
+          items: [
+            { slug: 'operacion/errores-frecuentes' },
+            { slug: 'operacion/debug-y-logs' },
+            { slug: 'operacion/actualizacion-y-migraciones' },
+            { slug: 'operacion/seguridad-y-secretos' },
+            { slug: 'operacion/ci-cd' },
+            { slug: 'operacion/observabilidad' },
+          ],
+        },
+        {
+          label: 'Recetas',
+          translations: { en: 'Recipes', ja: 'レシピ' },
+          collapsed: true,
+          items: [
+            { slug: 'recetas/crear-una-skill' },
+            { slug: 'recetas/ipc-entre-purutos' },
+            { slug: 'recetas/ejecutar-con-cron' },
+            { slug: 'recetas/integrar-telegram' },
+          ],
+        },
+        {
+          label: 'Adopción',
+          translations: { en: 'Adoption', ja: '導入' },
+          collapsed: true,
+          items: [
+            { slug: 'adopcion/buenas-practicas' },
+            { slug: 'adopcion/anti-patrones' },
           ],
         },
         {
@@ -44,6 +91,9 @@ export default defineConfig({
             { slug: 'referencia/estandar' },
             { slug: 'referencia/formato-skill' },
             { slug: 'referencia/ipc' },
+            { slug: 'referencia/config-completa' },
+            { slug: 'referencia/variables-de-entorno' },
+            { slug: 'referencia/errores-y-codigos' },
             { slug: 'referencia/cli' },
           ],
         },
