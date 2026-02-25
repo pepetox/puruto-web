@@ -61,6 +61,7 @@ export default defineConfig({
             { slug: 'operacion/seguridad-y-secretos' },
             { slug: 'operacion/ci-cd' },
             { slug: 'operacion/observabilidad' },
+            { slug: 'operacion/deploy-de-la-web' },
           ],
         },
         {

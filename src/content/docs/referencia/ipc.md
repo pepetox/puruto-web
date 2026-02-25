@@ -130,7 +130,11 @@ Notas:
 
 - `owner` se rellena con el nombre del repo
 - `max_hops` por defecto en la plantilla actual es `2`
-- `allowed_targets` empieza vacío (deny-by-default)
+- `allowed_targets` empieza vacío
+
+:::caution
+En el scaffold actual `ipc.py`, `allowed_targets: []` **no bloquea** por sí solo (la validación solo restringe si la lista tiene elementos). Si quieres policy deny-by-default, debes poblar explícitamente la allowlist y gestionarla con disciplina.
+:::
 
 ### Ejemplo operativo con allowlists
 
@@ -220,6 +224,85 @@ La skill scaffold `/call` (visible en snapshots del generador) recuerda:
 3. respetar `max_hops`
 4. incluir `request_id` y `correlation_id`
 
+## CLI del scaffold (`invoker.py` e `ipc.py`)
+
+### `invoker.py` (scaffold común local)
+
+CLI disponible en el scaffold (según snapshot generado):
+
+```bash
+python3 invoker.py \
+  --target puruto-data \
+  --action read \
+  --prompt "Lee registro" \
+  --caller puruto-ipc \
+  --timeout 120
+```
+
+La salida incluye:
+
+- `request` con campos extra del scaffold (`payload`, `requested_at`)
+- `response` con resultado stub (`stub: true`, `echo`, `prompt_preview`)
+
+### `ipc.py` (cliente IPC local scaffold)
+
+CLI disponible:
+
+```bash
+python3 ipc.py \
+  --target puruto-data \
+  --action read \
+  --prompt "Lee registro" \
+  --timeout 120 \
+  --hop 0
+```
+
+Comportamiento:
+
+- carga `.puruto-ipc.json`
+- valida allowlists
+- delega al `invoker.py` scaffold
+- imprime JSON (`request` + `response`) o error estructurado
+
+### Ejemplo real (scaffold, éxito)
+
+```json
+{
+  "response": {
+    "status": "ok",
+    "result": {
+      "stub": true,
+      "echo": {
+        "target": "puruto-data",
+        "action": "read"
+      }
+    }
+  }
+}
+```
+
+### Ejemplo real (scaffold, `DENIED`)
+
+Con `allowed_targets` que no incluye el target:
+
+```json
+{
+  "response": {
+    "status": "error",
+    "error": {
+      "code": "DENIED",
+      "message": "DENIED: target `puruto-data` no está en allowed_targets"
+    }
+  }
+}
+```
+
+### Otro error scaffold: `IPC_ERROR`
+
+Si `ipc.py` falla por cualquier excepción no controlada (por ejemplo falta `.puruto-ipc.json`), el scaffold devuelve:
+
+- `error.code = "IPC_ERROR"`
+
 ## Seguridad y límites
 
 - Nunca delegues a un Puruto fuera de `allowed_targets`
@@ -241,7 +324,10 @@ El IPC agéntico en Puruto está en modo scaffold MVP:
 # Validar estructura IPC + tipos JSON
 python3 .claude/skills/validate/scripts/validate.py /ruta/a/tu-puruto --json
 
-# Prueba local del scaffold (si existe ipc.py)
+# Probar invoker scaffold
+python3 invoker.py --target puruto-data --action read --prompt "Lee registro"
+
+# Probar cliente IPC scaffold (usa .puruto-ipc.json)
 python3 ipc.py --target puruto-data --action read --prompt "Lee el registro"
 ```
 

@@ -75,6 +75,14 @@ El generador crea repos en este orden de preferencia:
 2. `../purutos/<nombre>` relativo al CWD, si existe `../purutos/`
 3. `<cwd>/<nombre>` como fallback final
 
+### Códigos de salida (exit codes)
+
+En el código actual de `generate.py`:
+
+- `0`: generación correcta
+- `1`: error de negocio/uso (por ejemplo repo destino ya existe, falta `--description` en Puruto estándar)
+- `2`: error de argumentos (`argparse`, por ejemplo flags inválidos)
+
 ---
 
 ## validate.py
@@ -150,6 +158,14 @@ done
 Consulta la referencia completa:
 
 - → [Errores y códigos de validación](/referencia/errores-y-codigos/)
+
+### Códigos de salida (exit codes)
+
+En `validate.py`:
+
+- `0`: sin errores estructurales (puede haber warnings)
+- `1`: hay al menos un finding de nivel `error`
+- `2`: error de argumentos (`argparse`)
 
 ---
 
@@ -227,6 +243,14 @@ Para repos antiguos o dudosos:
 1. `upgrade.py --plan --json`
 2. `upgrade.py --json`
 3. `validate.py --json`
+
+### Códigos de salida (exit codes)
+
+En `upgrade.py`:
+
+- `0`: ejecución correcta (incluye noop, `--plan`, `--dry-run` y migración aplicada)
+- `1`: no hay ruta de migración soportada u otro error controlado del script
+- `2`: error de argumentos (`argparse`)
 
 ### Migraciones disponibles
 
