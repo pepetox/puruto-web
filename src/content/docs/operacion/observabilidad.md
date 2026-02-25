@@ -91,6 +91,21 @@ tail -n 20 notifications/events.jsonl
 python3 main.py status
 ```
 
+### `puruto-data`
+
+Señales útiles (MVP scaffold):
+
+- `registry.json` (Purutos registrados)
+- `shared/` (carpeta compartida)
+- carpetas `<puruto-name>/` declaradas en el registro
+
+Comandos útiles:
+
+```bash
+python3 -c "import json; from pathlib import Path; reg=json.loads(Path('registry.json').read_text()); print(len(reg.get('purutos', [])))"
+ls -la shared
+```
+
 ### `puruto-telegram`
 
 Señales útiles (MVP scaffold):
@@ -143,6 +158,7 @@ Puedes añadirlo después, pero este baseline ya permite depurar bastante.
 ## Siguientes pasos
 
 - → [Debug y logs](/operacion/debug-y-logs/)
+- → [Diagnóstico de puruto-data](/operacion/diagnostico-puruto-data/)
 - → [Artefactos runtime locales (MVP)](/referencia/artefactos-runtime-locales/)
 - → [CI/CD](/operacion/ci-cd/)
 - → [Ejecutar con puruto-cron](/recetas/ejecutar-con-cron/)

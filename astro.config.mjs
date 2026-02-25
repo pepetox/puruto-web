@@ -63,6 +63,7 @@ export default defineConfig({
             { slug: 'operacion/observabilidad' },
             { slug: 'operacion/deploy-de-la-web' },
             { slug: 'operacion/diagnostico-puruto-gateway' },
+            { slug: 'operacion/diagnostico-puruto-data' },
           ],
         },
         {
