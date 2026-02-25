@@ -83,3 +83,7 @@ PURUTO_DATA_PATH=/home/user/purutos/puruto-data/
 :::danger
 `puruto-data` contiene tus datos personales. **Nunca** lo hagas público ni lo subas a un repositorio público de GitHub.
 :::
+
+## Ver también
+
+- → [`registry.json` de puruto-data](/referencia/registry-json-puruto-data/)

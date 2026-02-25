@@ -62,6 +62,7 @@ export default defineConfig({
             { slug: 'operacion/ci-cd' },
             { slug: 'operacion/observabilidad' },
             { slug: 'operacion/deploy-de-la-web' },
+            { slug: 'operacion/diagnostico-puruto-gateway' },
           ],
         },
         {
@@ -95,6 +96,7 @@ export default defineConfig({
             { slug: 'referencia/ipc' },
             { slug: 'referencia/contratos-runtime' },
             { slug: 'referencia/gateway-api-mvp' },
+            { slug: 'referencia/registry-json-puruto-data' },
             { slug: 'referencia/artefactos-runtime-locales' },
             { slug: 'referencia/config-jobs-json' },
             { slug: 'referencia/config-channels-json' },

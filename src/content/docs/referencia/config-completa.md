@@ -104,6 +104,10 @@ El validador comprueba componentes como:
 - `shared/.gitkeep`
 - `.claude/skills/register/SKILL.md`
 
+Referencias útiles:
+
+- → [`registry.json` de puruto-data](/referencia/registry-json-puruto-data/)
+
 ### `puruto-telegram`
 
 El validador comprueba componentes como:
@@ -112,6 +116,10 @@ El validador comprueba componentes como:
 - `.channels.json`
 - `db/.gitkeep`, `inbox/.gitkeep`
 - skills `add-channel` y `drain-inbox`
+
+Referencias útiles:
+
+- → [`.channels.json` (referencia)](/referencia/config-channels-json/)
 
 ### `puruto-cron`
 
@@ -122,11 +130,19 @@ El validador comprueba componentes como:
 - `db/`, `runs/`, `notifications/`
 - skills `register-job`, `pause-job`, `resume-job`, `run-now`, `logs`
 
+Referencias útiles:
+
+- → [`.jobs.json` (referencia)](/referencia/config-jobs-json/)
+
 ### `puruto-gateway`
 
 El validador comprueba componentes como:
 
 - `app.py`, `routes.py`, `auth.py`, `registry.py`, `invoker.py`
+
+Referencias útiles:
+
+- → [Gateway API (MVP)](/referencia/gateway-api-mvp/)
 
 ## Validar configuración (comando recomendado)
 
